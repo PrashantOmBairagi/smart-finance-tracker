@@ -1,86 +1,140 @@
-# Smart Finance Tracker
+# Smart Finance Tracker & Analyzer
 
-A backend-based finance tracking and expense analysis system built using **Spring Boot** and **MySQL**.
+Backend-focused finance management system built using **Java**, **Spring Boot**, and **PostgreSQL** for expense tracking, categorization, and structured financial management.
 
-This project is being developed to simulate a real-world financial tracking platform focused on clean backend architecture, scalable design, and practical business logic.
-
-## Current Goal (Phase 1)
-
-Build a solid backend foundation for:
-
-- Expense management
-- Category-based tracking
-- Data persistence with MySQL
-- REST APIs using Spring Boot
-- Input validation
-- Clean layered architecture
-
-## Planned Features
-
-### Phase 1
-- Add expense
-- View expenses
-- Delete expense
-- Fixed categories
-- MySQL integration
-- Validation
-
-### Phase 2
-- User authentication (JWT)
-- Multi-user support
-- Expense editing
-- Budget goals
-- Filtering & analytics
-
-### Phase 3
-- Expense insights & analysis
-- Charts/dashboard
-- Google Login
-- Custom categories
-- Deployment
-
-## Tech Stack
-
-- Java 21
-- Spring Boot
-- Spring Data JPA
-- Hibernate
-- MySQL
-- Maven
-- Lombok
-- Bean Validation
-
-## Architecture
-
-The project follows a layered backend architecture:
-
-```text
-Controller
-    ↓
-Service
-    ↓
-Repository
-    ↓
-Database
-```
-
-## Project Status
-
-🚧 Currently in active development.
-
-This project is being built incrementally with a focus on understanding backend engineering concepts and real-world API design.
-
-## Learning Focus
-
-This project is helping me strengthen:
-
-- Spring Boot
-- REST API development
-- Database design
-- JPA/Hibernate
-- Backend architecture
-- Real-world project development
+The project is focused on building a scalable backend system with clean API design, database integration, and modular architecture for managing personal financial data.
 
 ---
 
-Built by Prashant Bairagi
+## Tech Stack
+
+### Backend
+- Java
+- Spring Boot
+- Spring Data JPA
+- REST APIs
+
+### Database
+- PostgreSQL
+
+### Tools & Platforms
+- Maven
+- Postman
+- Git & GitHub
+- IntelliJ IDEA
+
+---
+
+## Features
+
+### Implemented / In Progress
+- Expense data management
+- CRUD operations for financial records
+- Database integration using PostgreSQL
+- REST API architecture
+- Structured backend project setup
+
+### Planned Features
+- Expense categorization
+- Monthly spending insights
+- Financial analytics APIs
+- Budget tracking system
+- Data filtering and reporting
+
+---
+
+## Project Architecture
+
+The backend follows a layered architecture approach:
+
+```text
+Controller Layer
+       ↓
+Service Layer
+       ↓
+Repository Layer (JPA)
+       ↓
+PostgreSQL Database
+```
+
+The goal is to maintain clean separation of concerns and scalable backend design practices.
+
+---
+
+## API Design
+
+The project is being developed around RESTful API principles for handling:
+
+- Expense creation
+- Expense updates
+- Expense deletion
+- Financial record retrieval
+- Data filtering
+
+API testing and endpoint validation are performed using **Postman**.
+
+---
+
+## Database Design
+
+The system uses **PostgreSQL** for persistent data storage.
+
+Current database planning includes:
+
+- Expense records
+- Categories
+- Amount tracking
+- Date-based organization
+- Financial summaries
+
+---
+
+## Project Status
+
+🚧 **Currently Under Active Development**
+
+Completed:
+- Project setup
+- Backend structure initialization
+- Database integration
+- Initial CRUD implementation
+
+Upcoming:
+- Expense categorization
+- Analytics functionality
+- Filtering and reporting APIs
+- Improved backend optimization
+
+---
+
+## Future Scope
+
+Planned improvements include:
+
+- Authentication & user accounts
+- Financial insights dashboard
+- Smart budgeting support
+- Exportable financial reports
+- Improved analytics system
+
+---
+
+## Learning & Engineering Goals
+
+This project focuses on strengthening practical backend engineering skills involving:
+
+- REST API design
+- Database schema planning
+- Spring Boot backend architecture
+- PostgreSQL integration
+- Clean backend development practices
+
+---
+
+## Author
+
+**Prashant Bairagi**
+
+🌐 Portfolio: https://prashant-bairagi-portfolio.vercel.app/  
+💻 GitHub: https://github.com/PrashantOmBairagi  
+💼 LinkedIn: https://linkedin.com/in/prashant-bairagi-kmlpr
