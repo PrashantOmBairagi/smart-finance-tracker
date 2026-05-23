@@ -15,6 +15,7 @@ The project is focused on building a scalable backend system with clean API desi
 - REST APIs
 
 ### Database
+- mySql
 - PostgreSQL
 
 ### Tools & Platforms
@@ -30,7 +31,7 @@ The project is focused on building a scalable backend system with clean API desi
 ### Implemented / In Progress
 - Expense data management
 - CRUD operations for financial records
-- Database integration using PostgreSQL
+- Database integration using mySQL
 - REST API architecture
 - Structured backend project setup
 
