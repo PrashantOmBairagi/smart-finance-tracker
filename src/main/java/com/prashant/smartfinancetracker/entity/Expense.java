@@ -2,8 +2,8 @@ package com.prashant.smartfinancetracker.entity;
 
 import com.prashant.smartfinancetracker.enums.ExpenseCategory;
 import jakarta.persistence.*;
-import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.PastOrPresent;
 import jakarta.validation.constraints.Positive;
 import lombok.Getter;
 import lombok.Setter;
@@ -12,13 +12,14 @@ import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 
+@Entity
 @Table(name = "expenses")
 public class Expense {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Getter
     @Setter
-    private String id;
+    private Long id;
 
     @Getter
     @Setter
@@ -40,7 +41,8 @@ public class Expense {
 
     @Getter
     @Setter
-    @NotEmpty(message = "Expense date is required.")
+    @NotNull(message = "Expense date is required.")
+    @PastOrPresent(message = "Expense cannot have future date.")
     private LocalDate expenseDate;
 
     @Getter

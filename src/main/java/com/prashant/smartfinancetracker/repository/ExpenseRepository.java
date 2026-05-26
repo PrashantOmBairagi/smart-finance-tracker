@@ -1,7 +1,9 @@
 package com.prashant.smartfinancetracker.repository;
 
 import com.prashant.smartfinancetracker.entity.Expense;
-import org.springframework.data.repository.CrudRepository;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 
-public abstract class ExpenseRepository implements CrudRepository<Expense,String> {
+@Repository
+public interface ExpenseRepository extends JpaRepository<Expense,Long> {
 }
