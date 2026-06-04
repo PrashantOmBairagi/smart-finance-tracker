@@ -6,32 +6,33 @@ import jakarta.persistence.*;
 import jakarta.validation.constraints.*;
 import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 import java.util.UUID;
+
+import static org.hibernate.internal.util.collections.CollectionHelper.listOf;
 
 @Entity
 @Table(name = "users")
 @Getter
 @Setter
 @NoArgsConstructor
-public class User {
+public class User implements UserDetails {
 
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
 
     @Column(unique = true, nullable = false)
-    @NotBlank(message = "Username is required.")
-    @Size(min = 4, max = 30,
-            message = "Username must be between 4 and 30 characters.")
-    @Pattern(
-            regexp = "^[a-zA-Z0-9_]+$",
-            message = "Username can contain only letters, numbers and underscore."
-    )
-    private String username;
+    @NotBlank(message = "Email is required.")
+    @Email(message = "Enter valid Email address.")
+    private String email;
 
     @Column(nullable = false)
     @NotBlank(message = "Password is required.")
@@ -57,7 +58,6 @@ public class User {
     )
     private String phone;
 
-    @NotNull(message = "Budget is required.")
     @PositiveOrZero(message = "Budget cannot be negative.")
     private Long budget;
 
@@ -71,4 +71,45 @@ public class User {
     )
     @JsonIgnore
     private List<Expense> expenses = new ArrayList<>();
+
+    //overriden methods of implemented class userDetail
+    @Override
+    @JsonIgnore
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        return listOf();
+    }
+
+    @Override
+    public String getPassword() {
+        return this.password;
+    }
+
+    @Override
+    public String getUsername() {
+        return this.email;
+    }
+
+    @Override
+    @JsonIgnore
+    public boolean isAccountNonExpired() {
+        return true;
+    }
+
+    @Override
+    @JsonIgnore
+    public boolean isAccountNonLocked() {
+        return true;
+    }
+
+    @Override
+    @JsonIgnore
+    public boolean isCredentialsNonExpired() {
+        return true;
+    }
+
+    @Override
+    @JsonIgnore
+    public boolean isEnabled() {
+        return true;
+    }
 }

@@ -22,8 +22,8 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 public class Expense {
 
-    @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "user_username")
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "user_id")
     private User user;
 
     @Id
