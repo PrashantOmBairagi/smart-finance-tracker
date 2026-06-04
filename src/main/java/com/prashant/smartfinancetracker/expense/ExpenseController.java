@@ -1,10 +1,7 @@
-package com.prashant.smartfinancetracker.controller;
+package com.prashant.smartfinancetracker.expense;
 
-import com.prashant.smartfinancetracker.entity.Expense;
-import com.prashant.smartfinancetracker.service.ExpenseService;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotNull;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;

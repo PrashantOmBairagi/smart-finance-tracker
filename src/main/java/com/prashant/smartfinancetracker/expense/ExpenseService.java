@@ -1,8 +1,6 @@
-package com.prashant.smartfinancetracker.service;
+package com.prashant.smartfinancetracker.expense;
 
-import com.prashant.smartfinancetracker.entity.Expense;
 import com.prashant.smartfinancetracker.exception.ResourceNotFoundException;
-import com.prashant.smartfinancetracker.repository.ExpenseRepository;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;

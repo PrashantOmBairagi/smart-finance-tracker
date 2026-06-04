@@ -1,6 +1,5 @@
-package com.prashant.smartfinancetracker.repository;
+package com.prashant.smartfinancetracker.expense;
 
-import com.prashant.smartfinancetracker.entity.Expense;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

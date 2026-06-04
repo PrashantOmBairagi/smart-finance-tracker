@@ -14,7 +14,7 @@ public class SmartFinanceTrackerAppApplication {
 
 	}
 	@PostConstruct
-	public void init() {
+	public void set() {
 		TimeZone.setDefault(TimeZone.getTimeZone("Asia/Kolkata"));
 	}
 
