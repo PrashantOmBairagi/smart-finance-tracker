@@ -1,20 +1,32 @@
 package com.prashant.smartfinancetracker.auth;
 
-
-import com.prashant.smartfinancetracker.expense.Expense;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+
 
 @Validated
 @RequiredArgsConstructor
-@RestController("/api/v1/auth")
+@RestController
+@RequestMapping("/api/v1/auth")
 public class AuthController {
 
-    public ResponseEntity<?> register(@Valid @RequestBody Expense expense) {
-        return null; //for now
+    private final AuthService authService;
+
+    @PostMapping("/register")
+    public ResponseEntity<?> register(@Valid @RequestBody AuthRequest request) {
+        return authService.register(request);
+    }
+
+    @PostMapping("/login")
+    public ResponseEntity<?> login(@Valid @RequestBody AuthRequest request) {
+        return null;
     }
 }

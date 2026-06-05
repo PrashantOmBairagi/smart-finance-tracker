@@ -32,7 +32,7 @@ public class User implements UserDetails {
     @Column(unique = true, nullable = false)
     @NotBlank(message = "Email is required.")
     @Email(message = "Enter valid Email address.")
-    private String email;
+    private String email; //Using as Username
 
     @Column(nullable = false)
     @NotBlank(message = "Password is required.")
@@ -41,7 +41,6 @@ public class User implements UserDetails {
     private String password;
 
     @Column(nullable = false)
-    @NotBlank(message = "First name is required.")
     @Size(min = 3, max = 20,
             message = "First name must be between 3 and 20 characters.")
     private String firstName;
@@ -51,7 +50,6 @@ public class User implements UserDetails {
     private String lastName;
 
     @Column(unique = true)
-    @NotBlank(message = "Phone number is required.")
     @Pattern(
             regexp = "^[6-9][0-9]{9}$",
             message = "Enter a valid 10-digit Indian mobile number."
@@ -63,6 +61,9 @@ public class User implements UserDetails {
 
     @CreationTimestamp
     private LocalDateTime createdAt;
+
+
+    private boolean profileComplete;
 
     @OneToMany(
             mappedBy = "user",
