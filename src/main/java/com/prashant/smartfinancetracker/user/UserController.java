@@ -1,6 +1,7 @@
 package com.prashant.smartfinancetracker.user;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import java.util.UUID;
@@ -18,6 +19,12 @@ public class UserController {
     public User save(@Valid @RequestBody User user) {
         userService.addUser(user);
         return user;
+    }
+
+    @PostMapping("/profile")
+    public ResponseEntity<?> completeProfile(@Valid @RequestBody CompleteProfileRequest request) {
+        userService.completeProfile(request);
+        return ResponseEntity.ok().build();
     }
 
 }

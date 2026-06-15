@@ -1,5 +1,6 @@
 package com.prashant.smartfinancetracker.auth;
 
+import com.prashant.smartfinancetracker.security.JwtService;
 import com.prashant.smartfinancetracker.user.User;
 import com.prashant.smartfinancetracker.user.UserRepository;
 import lombok.RequiredArgsConstructor;
@@ -9,12 +10,15 @@ import org.springframework.stereotype.Service;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.UUID;
+
 @Service
 @RequiredArgsConstructor
 public class AuthService {
 
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
+    private final JwtService jwtService;
 
 
     public ResponseEntity<?> register(AuthRequest request){
@@ -33,7 +37,7 @@ public class AuthService {
 
         userRepository.save(user);
 
-
-        return null;
+        String token = jwtService.generateToken(user);
+        return ResponseEntity.ok().body(new AuthResponse(token,"Registration Successful", user.isProfileComplete()));
     }
 }
