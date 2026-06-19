@@ -28,6 +28,9 @@ public class UserService {
         user.setPhone(request.getPhone());
         userRepository.save(user);
     }
+    public User getUser(UUID id) {
+        return userRepository.findById(id).orElseThrow();
+    }
 
 
 }

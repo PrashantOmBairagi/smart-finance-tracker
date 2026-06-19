@@ -2,8 +2,10 @@ package com.prashant.smartfinancetracker.user;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+
 import java.util.UUID;
 
 @Validated
@@ -22,10 +24,15 @@ public class UserController {
         return user;
     }
 
-    @PostMapping("/profile")
+    @PostMapping("/complete-profile")
     public ResponseEntity<?> completeProfile(@Valid @RequestBody CompleteProfileRequest request) {
         userService.completeProfile(request);
         return ResponseEntity.ok().build();
+    }
+    @GetMapping("/profile")
+    public ResponseEntity<?> getProfile() {
+        UUID id = (UUID) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        return ResponseEntity.ok(userService.getUser(id));
     }
 
 }
