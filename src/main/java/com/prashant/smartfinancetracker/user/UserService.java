@@ -17,16 +17,14 @@ public class UserService {
     }
     public void completeProfile(CompleteProfileRequest request) {
 
-        SecurityContext context = SecurityContextHolder.getContext();
-        UUID userId = (UUID) context.getAuthentication().getPrincipal();
+        User currentUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 
-        User user = userRepository.findById(userId).orElseThrow();
-
-        user.setFirstName(request.getFirstName());
-        user.setLastName(request.getLastName());
-        user.setBudget(request.getBudget());
-        user.setPhone(request.getPhone());
-        userRepository.save(user);
+        currentUser.setFirstName(request.getFirstName());
+        currentUser.setLastName(request.getLastName());
+        currentUser.setBudget(request.getBudget());
+        currentUser.setPhone(request.getPhone());
+        currentUser.setProfileComplete(true);
+        userRepository.save(currentUser);
     }
     public User getUser(UUID id) {
         return userRepository.findById(id).orElseThrow();
