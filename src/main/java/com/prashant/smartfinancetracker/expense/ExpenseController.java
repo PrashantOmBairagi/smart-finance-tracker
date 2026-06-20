@@ -22,34 +22,34 @@ public class ExpenseController {
     private final AuthService authService;
 
     @PostMapping
-    public ResponseEntity<?> save(@Valid @RequestBody ExpenseRequest expenseRequest) {
+    public ResponseEntity<?> createExpense(@Valid @RequestBody ExpenseRequest expenseRequest) {
         User currentUser = authService.getCurrentUser();
         expenseService.createExpense(expenseRequest, currentUser);
         return new ResponseEntity<>("Kharcha Saved",HttpStatus.ACCEPTED);
     }
 
-    @GetMapping("/get")
+    @GetMapping
     public List<Expense> getAllExpenses()
     {
         User currentUser = authService.getCurrentUser();
         return expenseService.findAllExpenses(currentUser);
     }
 
-    @GetMapping("/get/{id}")
+    @GetMapping("/{id}")
     public Expense getExpenseById(@NotNull @PathVariable long id)
     {
         User currentUser = authService.getCurrentUser();
         return expenseService.findExpenseById(id,currentUser);
     }
 
-    @PutMapping("/update/{id}")
+    @PutMapping("/{id}")
     public ResponseEntity<?> updateExpense(@NotNull @PathVariable Long id , @Valid @RequestBody ExpenseUpdateRequest request){
         User currentUser = authService.getCurrentUser();
         expenseService.updateExpense(id,request,currentUser);
         return new ResponseEntity<>("Expense Deleted Successfully",HttpStatus.OK);
     }
 
-    @DeleteMapping("/delete/{id}")
+    @DeleteMapping("/{id}")
     public ResponseEntity<String> deleteExpenseById(@NotNull @PathVariable Long id) {
         User currentUser = authService.getCurrentUser();
         return expenseService.deleteExpenseById(id,currentUser);
