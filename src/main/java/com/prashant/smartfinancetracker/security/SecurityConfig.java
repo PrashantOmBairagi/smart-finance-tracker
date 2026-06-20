@@ -23,7 +23,7 @@ public class SecurityConfig {
 
     private final JwtAuthenticationFilter jwtAuthFilter;
     private final UserDetailsService userDetailsService;
-    private final PasswordEncoder passwordEncoder;
+
 
     @Bean
     public PasswordEncoder passwordEncoder() {
@@ -35,8 +35,13 @@ public class SecurityConfig {
         http
                 .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/api/v1/public/**","/api/v1/auth/**").permitAll()
-                        .requestMatchers("/swagger-ui.html" ,"swagger-ui/**", "/swagger-ui/index.html").permitAll()
+                        .requestMatchers("/api/v1/public/**",
+                                "/api/v1/auth/**"
+                        ).permitAll()
+                        .requestMatchers("/swagger-ui/**",
+                                "/v3/api-docs/**",
+                                "/swagger-ui.html"
+                        ).permitAll()
                         .anyRequest().authenticated()
                 ).formLogin(Customizer.withDefaults());
         return http.build();
@@ -45,7 +50,7 @@ public class SecurityConfig {
     @Bean
     public AuthenticationProvider authenticationProvider() {
         DaoAuthenticationProvider daoAuthProvider = new DaoAuthenticationProvider(userDetailsService);
-        daoAuthProvider.setPasswordEncoder(passwordEncoder);
+        daoAuthProvider.setPasswordEncoder(passwordEncoder());
         return daoAuthProvider;
     }
 

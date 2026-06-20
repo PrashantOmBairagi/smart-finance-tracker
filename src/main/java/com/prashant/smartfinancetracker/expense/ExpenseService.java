@@ -31,4 +31,7 @@ public class ExpenseService {
         expenseRepository.deleteById(id);
         return new ResponseEntity<>("Expense deleted", HttpStatus.OK);
     }
+    public Expense findExpenseById(Long id) {
+        return expenseRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Expense not found"));
+    }
 }
