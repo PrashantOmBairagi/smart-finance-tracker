@@ -1,37 +1,66 @@
 package com.prashant.smartfinancetracker.expense;
 
 import com.prashant.smartfinancetracker.exception.ResourceNotFoundException;
+import com.prashant.smartfinancetracker.user.User;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDateTime;
 import java.util.List;
 
 @Service
+@RequiredArgsConstructor
 public class ExpenseService {
 
     private final ExpenseRepository expenseRepository;
-    public ExpenseService(ExpenseRepository expenseRepository) {
-        this.expenseRepository = expenseRepository;
-    }
 
-    public void save(Expense expense) {
-        expense.setCreatedAt(LocalDateTime.now());
+    public void createExpense(ExpenseRequest request , User currentUser) {
+        Expense expense = new Expense();
+        expense.setCategory(request.getCategory());
+        expense.setDescription(request.getDescription());
+        expense.setExpenseDate(request.getExpenseDate());
+        expense.setUser(currentUser);
         expenseRepository.save(expense);
     }
 
-    public List<Expense> findAllExpenses() {
-        return expenseRepository.findAll();
+    public void updateExpense(Long expenseId, ExpenseUpdateRequest request, User currentUser) {
+        Expense expense = findExpenseById(expenseId, currentUser);
+        expense.setCategory(request.getCategory());
+        expense.setDescription(request.getDescription());
+        expense.setExpenseDate(request.getExpenseDate());
+        expenseRepository.save(expense);
     }
-    public ResponseEntity<String> deleteExpenseById(Long id) {
-        if (!expenseRepository.existsById(id)) {
-            throw new ResourceNotFoundException("Expense not found");
-        }
-        expenseRepository.deleteById(id);
+
+    public List<Expense> findAllExpenses(User currentUser) {
+        return expenseRepository.findByUserId(currentUser.getId());
+    }
+
+    public ResponseEntity<String> deleteExpenseById(Long id, User currentUser) {
+            Expense expense =
+                    expenseRepository
+                        .findByIdAndUserId(
+                                id,
+                                currentUser.getId()
+                        )
+                        .orElseThrow(
+                                () -> new ResourceNotFoundException(
+                                        "Expense not found"
+                                )
+                        );
+        expenseRepository.delete(expense);
         return new ResponseEntity<>("Expense deleted", HttpStatus.OK);
     }
-    public Expense findExpenseById(Long id) {
-        return expenseRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Expense not found"));
+    public Expense findExpenseById(Long id, User currentUser) {
+        return expenseRepository
+                .findByIdAndUserId(
+                        id,
+                        currentUser.getId()
+                )
+                .orElseThrow(
+                        () -> new ResourceNotFoundException(
+                                "Expense not found"
+                        )
+                );
     }
 }

@@ -23,7 +23,7 @@ import java.time.LocalDateTime;
 public class Expense {
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "user_id")
+    @JoinColumn(nullable = false, name = "user_id")
     private User user;
 
     @Id
@@ -33,22 +33,22 @@ public class Expense {
     @Column(length = 100)
     private String description;
 
-    @Column(precision = 10, scale = 2)
-    @NotNull
+    @Column(nullable = false, precision = 10, scale = 2)
     @Positive(message = "Amount must be positive.")
     private BigDecimal amount;
 
     @Enumerated(EnumType.STRING)
-    @NotNull(message = "Category is required.")
+    @Column(nullable = false)
     private ExpenseCategory category ;
 
-    @NotNull(message = "Expense date is required.")
     @PastOrPresent(message = "Expense cannot have future date.")
+    @Column(nullable = false)
     private LocalDate expenseDate;
 
     @Column(nullable = false, updatable = false)
     @CreationTimestamp
     private LocalDateTime createdAt;
+
     @UpdateTimestamp
     private LocalDateTime updatedAt;
 

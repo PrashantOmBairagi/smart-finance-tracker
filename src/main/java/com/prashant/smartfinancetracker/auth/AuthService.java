@@ -5,6 +5,7 @@ import com.prashant.smartfinancetracker.user.User;
 import com.prashant.smartfinancetracker.user.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -39,5 +40,12 @@ public class AuthService {
 
         String token = jwtService.generateToken(user);
         return ResponseEntity.ok().body(new AuthResponse(token,"Registration Successful", user.isProfileComplete()));
+    }
+    public User getCurrentUser() {
+        return (User)
+                SecurityContextHolder
+                        .getContext()
+                        .getAuthentication()
+                        .getPrincipal();
     }
 }

@@ -1,34 +1,30 @@
 package com.prashant.smartfinancetracker.expense;
 
 import com.prashant.smartfinancetracker.enums.ExpenseCategory;
-import jakarta.persistence.EnumType;
-import jakarta.persistence.Enumerated;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.PastOrPresent;
 import jakarta.validation.constraints.Positive;
 import lombok.*;
-import org.hibernate.validator.constraints.Length;
-import org.hibernate.validator.constraints.UUID;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
-@RequiredArgsConstructor
+
 @AllArgsConstructor
 @Getter
 @Setter
-public class ExpenseUpdateRequest {
+@NoArgsConstructor
+public class ExpenseRequest {
 
-    @Length(max = 100)
     private String description;
+
+    @NotNull(message = "Category is required.")
+    private ExpenseCategory category ;
 
     @NotNull
     @Positive(message = "Amount must be positive.")
     private BigDecimal amount;
 
-    @NotNull
-    private ExpenseCategory category ;
-
-    @NotNull
+    @NotNull(message = "Expense date is required.")
     @PastOrPresent(message = "Expense cannot have future date.")
     private LocalDate expenseDate;
 }
