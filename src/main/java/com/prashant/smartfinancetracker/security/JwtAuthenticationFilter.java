@@ -22,8 +22,8 @@ import java.util.UUID;
 @Component
 @RequiredArgsConstructor
 public class JwtAuthenticationFilter extends OncePerRequestFilter {
-    private JwtService jwtService;
-    private UserRepository userRepository;
+    private final JwtService jwtService;
+    private final UserRepository userRepository;
 
     @Override
     protected void doFilterInternal(

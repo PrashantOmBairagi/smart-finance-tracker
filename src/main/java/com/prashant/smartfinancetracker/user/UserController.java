@@ -31,7 +31,8 @@ public class UserController {
     }
     @GetMapping("/profile")
     public ResponseEntity<?> getProfile() {
-        UUID id = (UUID) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        User currentUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        UUID id = currentUser.getId();
         return ResponseEntity.ok(userService.getUser(id));
     }
 

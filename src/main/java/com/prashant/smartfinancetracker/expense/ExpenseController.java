@@ -46,7 +46,7 @@ public class ExpenseController {
     public ResponseEntity<?> updateExpense(@NotNull @PathVariable Long id , @Valid @RequestBody ExpenseUpdateRequest request){
         User currentUser = authService.getCurrentUser();
         expenseService.updateExpense(id,request,currentUser);
-        return new ResponseEntity<>("Expense Deleted Successfully",HttpStatus.OK);
+        return new ResponseEntity<>("Expense Updated Successfully",HttpStatus.OK);
     }
 
     @DeleteMapping("/{id}")

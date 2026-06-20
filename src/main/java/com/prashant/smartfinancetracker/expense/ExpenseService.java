@@ -19,6 +19,7 @@ public class ExpenseService {
         Expense expense = new Expense();
         expense.setCategory(request.getCategory());
         expense.setDescription(request.getDescription());
+        expense.setAmount(request.getAmount());
         expense.setExpenseDate(request.getExpenseDate());
         expense.setUser(currentUser);
         expenseRepository.save(expense);
@@ -27,6 +28,7 @@ public class ExpenseService {
     public void updateExpense(Long expenseId, ExpenseUpdateRequest request, User currentUser) {
         Expense expense = findExpenseById(expenseId, currentUser);
         expense.setCategory(request.getCategory());
+        expense.setAmount(request.getAmount());
         expense.setDescription(request.getDescription());
         expense.setExpenseDate(request.getExpenseDate());
         expenseRepository.save(expense);
