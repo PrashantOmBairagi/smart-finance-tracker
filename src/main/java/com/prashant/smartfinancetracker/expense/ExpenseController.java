@@ -11,6 +11,7 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Validated
 @RestController
@@ -29,17 +30,33 @@ public class ExpenseController {
     }
 
     @GetMapping
-    public List<Expense> getAllExpenses()
+    public List<ExpenseResponse> getAllExpenses()
     {
         User currentUser = authService.getCurrentUser();
-        return expenseService.findAllExpenses(currentUser);
+        List<Expense> expenses = expenseService.findAllExpenses(currentUser);
+        return expenses.stream()
+                .map(expense -> new ExpenseResponse(
+                        expense.getId(),
+                        expense.getDescription(),
+                        expense.getAmount(),
+                        expense.getCategory(),
+                        expense.getExpenseDate(),
+                        expense.getUser() != null ? expense.getUser().getId() : null
+                ))
+                .collect(Collectors.toList());
     }
 
     @GetMapping("/{id}")
-    public Expense getExpenseById(@NotNull @PathVariable long id)
+    public ExpenseResponse getExpenseById(@NotNull @PathVariable long id)
     {
         User currentUser = authService.getCurrentUser();
-        return expenseService.findExpenseById(id,currentUser);
+        Expense expense = expenseService.findExpenseById(id,currentUser);
+        return new ExpenseResponse(expense.getId(),
+                expense.getDescription(),
+                expense.getAmount(),
+                expense.getCategory(),
+                expense.getExpenseDate(),
+                expense.getUser() != null ? expense.getUser().getId() : null);
     }
 
     @PutMapping("/{id}")
