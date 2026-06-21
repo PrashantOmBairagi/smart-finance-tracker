@@ -60,6 +60,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
             }
         } catch (Exception e) {
             // Log or ignore corrupted tokens
+            e.printStackTrace();
         }
         filterChain.doFilter(request, response);
     }

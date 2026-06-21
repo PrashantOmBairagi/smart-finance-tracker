@@ -2,7 +2,6 @@ package com.prashant.smartfinancetracker.expense;
 import com.prashant.smartfinancetracker.enums.ExpenseCategory;
 import com.prashant.smartfinancetracker.user.User;
 import jakarta.persistence.*;
-import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.PastOrPresent;
 import jakarta.validation.constraints.Positive;
 import lombok.Getter;

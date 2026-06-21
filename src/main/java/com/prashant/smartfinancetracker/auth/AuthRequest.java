@@ -18,7 +18,7 @@ public class AuthRequest {
 
         @NotBlank(message = "Password is required.")
         @Size(min = 6, max = 50,
-                message = "Password must be between 6 and 50 characters.")
+                message = "Password must be 6 or greater.")
         private String password;
 
 }

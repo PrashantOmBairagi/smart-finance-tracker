@@ -36,11 +36,10 @@ public class User implements UserDetails {
 
     @Column(nullable = false)
     @NotBlank(message = "Password is required.")
-    @Size(min = 6, max = 50,
+    @Size(min = 6,
             message = "Password must be between 6 and 50 characters.")
     private String password;
 
-    @Column(nullable = false)
     @Size(min = 3, max = 20,
             message = "First name must be between 3 and 20 characters.")
     private String firstName;
@@ -56,13 +55,13 @@ public class User implements UserDetails {
     )
     private String phone;
 
-    @PositiveOrZero(message = "Budget cannot be negative.")
+    @Column(nullable =true, precision = 19, scale = 2)
     private Long budget;
 
     @CreationTimestamp
     private LocalDateTime createdAt;
 
-
+    @Column(nullable = true)
     private boolean profileComplete;
 
     @OneToMany(

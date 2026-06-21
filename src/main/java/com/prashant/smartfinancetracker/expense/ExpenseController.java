@@ -25,7 +25,7 @@ public class ExpenseController {
     public ResponseEntity<?> createExpense(@Valid @RequestBody ExpenseRequest expenseRequest) {
         User currentUser = authService.getCurrentUser();
         expenseService.createExpense(expenseRequest, currentUser);
-        return new ResponseEntity<>("Kharcha Saved",HttpStatus.ACCEPTED);
+        return new ResponseEntity<>("Kharcha Saved!",HttpStatus.ACCEPTED);
     }
 
     @GetMapping
