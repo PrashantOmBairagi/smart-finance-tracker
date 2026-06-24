@@ -3,6 +3,15 @@
 > A production-style personal finance backend built with **Java, Spring Boot, Spring Security, JWT Authentication, MySQL, Docker, and REST APIs**, powering the Android application **Kharcha Pani**.
 
 ---
+## Screenshots
+
+<p align="center">
+  <img src="screenshots/startup-page.png" width="190"/>
+   <img src="screenshots/login.png" width="190"/>
+   <img src="screenshots/homepage.png" width="190"/>
+  <img src="screenshots/analytics.png" width="190"/>
+  <img src="screenshots/dashboard.png" width="190"/>
+</p>
 
 ## 📖 Overview
 
@@ -317,8 +326,8 @@ Currently focused on:
 ### Connect With Me
 
 * LinkedIn: https://www.linkedin.com/in/prashant-bairagi-kmlpr
-* GitHub: https://github.com/PrashantOmBairagi
 * Portfolio: https://prashant-bairagi-portfolio.vercel.app
+* GitHub: https://github.com/PrashantOmBairagi
 ---
 ⭐ If you found this project interesting, consider giving it a star.
 <p align="center">
