@@ -6,11 +6,11 @@
 ## Screenshots
 
 <p align="center">
-  <img src="screenshots/startup-page.png" width="190"/>
-   <img src="screenshots/login.png" width="190"/>
-   <img src="screenshots/homepage.png" width="190"/>
-  <img src="screenshots/analytics.png" width="190"/>
-  <img src="screenshots/dashboard.png" width="190"/>
+  <img src="screenshots/startup-page.png" width="220"/>
+   <img src="screenshots/login.png" width="220"/>
+   <img src="screenshots/homepage.png" width="220"/>
+  <img src="screenshots/analytics.png" width="220"/>
+  <img src="screenshots/dashboard.png" width="220"/>
 </p>
 
 ## 📖 Overview
