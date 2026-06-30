@@ -3,6 +3,8 @@ package com.prashant.smartfinancetracker.expense;
 import com.prashant.smartfinancetracker.exception.ResourceNotFoundException;
 import com.prashant.smartfinancetracker.user.User;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -34,8 +36,8 @@ public class ExpenseService {
         expenseRepository.save(expense);
     }
 
-    public List<Expense> findAllExpenses(User currentUser) {
-        return expenseRepository.findByUserId(currentUser.getId());
+    public Page findAllExpenses(Pageable pageable, User currentUser) {
+        return expenseRepository.findByUserId(currentUser.getId(),pageable);
     }
 
     public ResponseEntity<String> deleteExpenseById(Long id, User currentUser) {

@@ -5,6 +5,9 @@ import com.prashant.smartfinancetracker.user.User;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotNull;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
@@ -30,20 +33,35 @@ public class ExpenseController {
     }
 
     @GetMapping
-    public List<ExpenseResponse> getAllExpenses()
-    {
+    public ExpensePageResponse getAllExpenses(
+            @RequestParam(defaultValue = "1") Integer pageNo,
+            @RequestParam(defaultValue = "10") Integer pageSize
+    ){
+        Pageable pageable = PageRequest.of(pageNo - 1, pageSize);
         User currentUser = authService.getCurrentUser();
-        List<Expense> expenses = expenseService.findAllExpenses(currentUser);
-        return expenses.stream()
+
+        Page<Expense> page = (Page<Expense>) expenseService.findAllExpenses(pageable, currentUser);
+
+        List<ExpenseResponse> expenses = page.getContent()
+                .stream()
                 .map(expense -> new ExpenseResponse(
                         expense.getId(),
                         expense.getDescription(),
                         expense.getAmount(),
                         expense.getCategory(),
                         expense.getExpenseDate(),
-                        expense.getUser() != null ? expense.getUser().getId() : null
+                        expense.getUser().getId()
                 ))
-                .collect(Collectors.toList());
+                .toList();
+
+        return new ExpensePageResponse(
+                expenses,
+                page.getNumber() + 1,
+                page.getTotalPages(),
+                page.getTotalElements(),
+                page.hasNext(),
+                page.hasPrevious()
+        );
     }
 
     @GetMapping("/{id}")
